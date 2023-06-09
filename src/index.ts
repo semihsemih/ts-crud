@@ -1,8 +1,15 @@
 import http from "http";
+import { getTasks } from "./controller/controller";
 
 const server = http.createServer((req, res) => {
-    res.write('Hello World!');
-    res.end();
+    if (req.method == "GET" && req.url == "/") {
+        res.write('Hello World!');
+        res.end();
+    }
+
+    if (req.method == "GET" && req.url == "/api/tasks") {
+        return getTasks(req, res);
+    }
 });
 
 server.listen(80, () => {
